@@ -5,9 +5,9 @@ Pequeno chatbot usando Streamlit + LangChain + AWS Bedrock (via langchain_aws). 
 ## Estrutura principal
 - `chatbot_frontend.py` — app Streamlit (UI).
 - `chatbot_backend.py` — funções que criam o LLM, memória e a cadeia de conversação.
-- (opcional) `requirements.txt` — lista de dependências (veja seção abaixo).
+- `requirements.txt` — lista de dependências (veja seção abaixo).
 
-## Dependências (sugestão)
+## Dependências
 Instale em um virtualenv/conda:
 - python >= 3.10
 - streamlit
@@ -56,21 +56,8 @@ streamlit run chatbot_frontend.py
 ```powershell
 python chatbot_backend.py
 ```
-(adapte se criar um `__main__` de teste).
-
-## Suporte a idioma do usuário
-Opções:
-- Detectar idioma no frontend (ex.: `langdetect`) e enviar um parâmetro `language` para `demo_chain`, então prefixar a entrada com uma instrução que force o LLM a responder no mesmo idioma.
-- Alternativa: no backend, peça ao LLM para detectar o idioma do usuário e responder no mesmo idioma (ex.: `Detect the user's language and reply in that language:`).
-
-Exemplo de uso (conceito): envie ao LLM:
-"Por favor, responda neste idioma: {idioma_detectado}\n\n{mensagem_do_usuario}"
 
 ## Problemas comuns e soluções rápidas
-
-- Erro pydantic / ConversationChain complaining about Runnable:
-  - Causa comum: você retornou uma tupla acidental (ex.: `llm_data = demo_chatbot(),`) — remova a vírgula. Sempre passe a instância do LLM (não `(llm,)`).
-  - Assegure-se de que o objeto LLM implementa a interface esperada pela versão do LangChain que está usando.
 
 - ResourceNotFoundException (modelo EOL):
   - Substitua o `model=` por um ID válido (listar modelos com `boto3.client("bedrock").list_models()`).
