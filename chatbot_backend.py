@@ -8,7 +8,7 @@ from langchain_aws import ChatBedrockConverse
 
 def demo_chatbot():
     demo_llm = ChatBedrockConverse(
-        credentials_profile_name='default',
+        #credentials_profile_name='default',
         model="amazon.titan-text-express-v1",
         temperature=0.5,
         max_tokens=100
